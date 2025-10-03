@@ -1,0 +1,16 @@
+Feb 26 18:54:32 Jidion login[704]: pam_unix(login:session): session opened for user darasimiop(uid=1000) by (uid=0)
+Feb 26 18:54:32 Jidion systemd-logind[209]: New session 1 of user darasimiop.
+Feb 26 18:54:32 Jidion systemd: pam_unix(systemd-user:session): session opened for user darasimiop(uid=1000) by (uid=0)
+Feb 26 19:09:01 Jidion CRON[5991]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Feb 26 19:09:01 Jidion CRON[5991]: pam_unix(cron:session): session closed for user root
+Feb 26 19:11:52 Jidion sudo: darasimiop : TTY=pts/5 ; PWD=/mnt/c/Users/daras/OneDrive/Documents/CyberSecurity Projects/log-analyzer ; USER=root ; COMMAND=/usr/bin/apt update
+Feb 26 19:11:52 Jidion sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Feb 26 19:11:56 Jidion sudo: pam_unix(sudo:session): session closed for user root
+Feb 26 19:11:56 Jidion sudo: darasimiop : TTY=pts/5 ; PWD=/mnt/c/Users/daras/OneDrive/Documents/CyberSecurity Projects/log-analyzer ; USER=root ; COMMAND=/usr/bin/apt install python3-venv -y
+Feb 26 19:11:56 Jidion sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Feb 26 19:12:03 Jidion sudo: pam_unix(sudo:session): session closed for user root
+Feb 26 19:17:02 Jidion CRON[10478]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Feb 26 19:17:02 Jidion CRON[10478]: pam_unix(cron:session): session closed for user root
+Feb 26 19:18:19 Jidion sudo: darasimiop : TTY=pts/5 ; PWD=/mnt/c/Users/daras/OneDrive/Documents/CyberSecurity Projects/log-analyzer ; USER=root ; COMMAND=/usr/bin/apt install python3-pip
+Feb 26 19:18:19 Jidion sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
+Feb 26 19:18:27 Jidion sudo: pam_unix(sudo:session): session closed for user root
