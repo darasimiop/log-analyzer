@@ -1,68 +1,62 @@
-# Log Analyzer 🛡️
+# Log Analyzer
 
-This Python script analyzes Linux authentication logs (`auth.log`) to detect **failed and successful SSH login attempts**. It extracts invalid login attempts and saves them into a structured CSV file.
+A small, presentable project that parses authentication-style logs (for example `/var/log/auth.log`) and produces a clean CSV report plus simple visualizations (bar and pie charts). Designed as a quick demo you can show at career fairs or include in your GitHub portfolio.
 
----
+Features
+- Flask demo with file upload and report download
+- Robust parsing heuristics for common auth log entries
+- Generates `security_report.csv`, `login_attempts_bar.png`, and `login_attempts_pie.png`
+- Unit test for the parser to demonstrate good engineering practices
 
-## 🚀 Quick Install with `log_analyzer.sh`
+Quickstart
 
-To install everything automatically, run:
+1. Create and activate a virtual environment:
+
 ```bash
-chmod +x log_analyzer.sh
-./log_analyzer.sh
-
-This will: ✔ Install required dependencies
-✔ Set up a Python virtual environment
-✔ Copy system logs for analysis
-✔ Run the Log Analyzer
-⚙️ Manual Installation & Setup
-
-1️⃣ Clone the repository:
-
-git clone https://github.com/darasimiop/log-analyzer.git
-cd log-analyzer
-
-2️⃣ Create a virtual environment & install dependencies:
-
-python3 -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+python -m venv venv
+source venv/bin/activate  # On Windows (PowerShell): venv\\Scripts\\Activate.ps1
 pip install -r requirements.txt
+```
 
-📌 Usage
-Analyze Default System Logs (auth.log):
+2. Run the demo web app (local):
 
-1️⃣ Copy the system log file (Linux only):
+```bash
+python app.py
+# then open http://localhost:5000 in your browser
+```
 
-sudo cp /var/log/auth.log ./auth.log
+3. Or run the CLI against the included `sample_log.txt`:
 
-2️⃣ Run the Log Analyzer:
+```bash
+python -m log_analyzer.log_analyzer -f log_analyzer/sample_log.txt -o ./static
+```
 
-python log_analyzer.py
+What's improved for presentation
+- Clear README and instructions
+- Polished web UI and safe file handling
+- CSV + visuals saved to `static/` so images and reports are easy to display on GitHub Pages or the demo site
 
-3️⃣ Check the generated report:
+License
 
-cat security_report.csv
+MIT
 
-Analyze Custom Log Files:
+Badges
 
-Instead of using auth.log, specify any log file:
+![CI](https://github.com/darasimiop/log-analyzer/actions/workflows/ci.yml/badge.svg)
 
-python log_analyzer.py -f my_custom_log.log
+Docker
 
-📊 Example Output:
+Build the image and run the demo locally:
 
-Timestamp,Status,Username,IP Address
-Feb 26 21:30:45,Invalid User,invaliduser,127.0.0.1
-Feb 26 21:35:20,Valid User,darasimi,192.168.1.10
+```bash
+docker build -t log-analyzer .
+docker run --rm -p 5000:5000 log-analyzer
+# open http://localhost:5000 in your browser
+```
 
-📌 Features:
+GitHub Actions
 
-✔️ Extracts failed SSH login attempts
-✔️ Extracts successful SSH logins
-✔️ Saves data in CSV format
-✔️ Works with real system logs
-✔️ Allows custom log file input
-✔️ Automates setup with log_analyzer.sh
-📜 License
+This repo includes a GitHub Actions workflow at `.github/workflows/ci.yml` which will run tests on push/PR. After you push this branch the CI badge above will show the build status.
 
-MIT License
+Want more polish?
+- I can add a Docker Compose file to run the app plus a tiny static file server, or add a GitHub Pages demo for the static outputs. Tell me which and I’ll wire it in.

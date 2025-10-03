@@ -1,40 +1,44 @@
-from flask import Flask, request, render_template
-import pandas as pd
+from flask import Flask, request, render_template, url_for
 import os
-from log_analyzer import parse_logs, save_to_csv, generate_charts
+from werkzeug.utils import secure_filename
+from log_analyzer.log_analyzer import parse_logs, generate_reports
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
+STATIC_FOLDER = os.path.join(BASE_DIR, "static")
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(STATIC_FOLDER, exist_ok=True)
 
 app = Flask(__name__)
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config["STATIC_FOLDER"] = STATIC_FOLDER
 
-# Create an uploads folder
-UPLOAD_FOLDER = "uploads"
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.route("/", methods=["GET", "POST"])
 def upload_file():
+    message = None
     if request.method == "POST":
-        file = request.files["file"]
-        if file:
-            filepath = os.path.join(UPLOAD_FOLDER, file.filename)
-            file.save(filepath)
+        uploaded = request.files.get("file")
+        if uploaded and uploaded.filename:
+            filename = secure_filename(uploaded.filename)
+            saved_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            uploaded.save(saved_path)
 
-            # Process the uploaded log file
-            log_data = parse_logs([filepath])
-            save_to_csv(log_data)
-            generate_charts(log_data)
+            # Parse and generate reports into the static folder
+            df = parse_logs(saved_path)
+            report_csv, bar_path, pie_path = generate_reports(df, output_dir=app.config["STATIC_FOLDER"]) 
 
-            return '''
-            <h1>✅ Analysis Complete!</h1>
-            <p>Check security_report.csv & generated charts.</p>
-            <p><a href="/">🔄 Upload Another File</a></p>
-            '''
+            message = f"Report generated: {os.path.basename(report_csv)}"
+            rows = df.to_dict(orient='records')
+            # Only send small number of rows to template for performance
+            return render_template("index.html", message=message, rows=rows[:200], bar_image=os.path.basename(bar_path), pie_image=os.path.basename(pie_path), report_file=os.path.basename(report_csv))
+        else:
+            message = "No file selected"
 
-    return '''
-    <h1>🔍 Log Analyzer Web App</h1>
-    <form method="post" enctype="multipart/form-data">
-        Upload Log File: <input type="file" name="file">
-        <input type="submit" value="Analyze">
-    </form>
-    '''
+    return render_template("index.html", message=message, rows=None, bar_image=None, pie_image=None, report_file=None)
+
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Use 0.0.0.0 for convenience when presenting; remove debug=True for production
+    app.run(host="0.0.0.0", port=5000, debug=True)
