@@ -54,9 +54,4 @@ docker run --rm -p 5000:5000 log-analyzer
 # open http://localhost:5000 in your browser
 ```
 
-GitHub Actions
 
-This repo includes a GitHub Actions workflow at `.github/workflows/ci.yml` which will run tests on push/PR. After you push this branch the CI badge above will show the build status.
-
-Want more polish?
-- I can add a Docker Compose file to run the app plus a tiny static file server, or add a GitHub Pages demo for the static outputs. Tell me which and I’ll wire it in.
