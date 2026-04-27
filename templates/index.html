@@ -10,7 +10,9 @@
         <div class="container py-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h1 class="h3">Log Analyzer</h1>
-                <a href="{{ url_for('static', filename=report_file) }}" class="btn btn-success btn-sm" {% if not report_file %}style="display:none"{% endif %}>Download CSV</a>
+                {% if report_file %}
+                <a href="{{ url_for('static', filename=report_file) }}" class="btn btn-success btn-sm">Download CSV</a>
+                {% endif %}
             </div>
 
             <div class="card mb-4">
