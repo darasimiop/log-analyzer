@@ -25,18 +25,47 @@
                     </form>
 
                     {% if message %}
-                    <div class="alert alert-success mt-3" role="alert">{{ message }}</div>
+                    <div class="alert alert-{{ message_type or 'info' }} mt-3" role="alert">{{ message }}</div>
                     {% endif %}
                 </div>
             </div>
 
-            {% if bar_image or pie_image %}
+            {% if summary %}
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <div class="text-muted">Total Events</div>
+                            <div class="display-6">{{ summary.total }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-3 mt-md-0">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <div class="text-muted">Failed Logins</div>
+                            <div class="display-6 text-danger">{{ summary.failed }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-3 mt-md-0">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <div class="text-muted">Successful Logins</div>
+                            <div class="display-6 text-success">{{ summary.success }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if status_bar or top_ips_bar %}
             <div class="row mb-4">
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-body text-center">
                             <h6>Login Attempts by Status</h6>
-                            <img src="{{ url_for('static', filename=bar_image) }}" class="img-fluid" alt="Bar chart">
+                            <img src="{{ url_for('static', filename=status_bar) }}" class="img-fluid" alt="Status bar chart">
                         </div>
                     </div>
                 </div>
@@ -44,8 +73,34 @@
                     <div class="card">
                         <div class="card-body text-center">
                             <h6>Top IPs by Attempts</h6>
-                            <img src="{{ url_for('static', filename=pie_image) }}" class="img-fluid" alt="Pie chart">
+                            <img src="{{ url_for('static', filename=top_ips_bar) }}" class="img-fluid" alt="Top IPs chart">
                         </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if top_ips %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Top IP Addresses</h5>
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>IP</th>
+                                    <th>Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ip, count in top_ips %}
+                                <tr>
+                                    <td>{{ ip }}</td>
+                                    <td>{{ count }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -63,6 +118,7 @@
                                     <th>Status</th>
                                     <th>User</th>
                                     <th>IP</th>
+                                    <th>Raw Message</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,6 +128,7 @@
                                     <td>{{ r.Status }}</td>
                                     <td>{{ r.User }}</td>
                                     <td>{{ r.IP }}</td>
+                                    <td class="text-muted">{{ r.Raw }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

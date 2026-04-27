@@ -1,57 +1,27 @@
 # Log Analyzer
 
-A small, presentable project that parses authentication-style logs (for example `/var/log/auth.log`) and produces a clean CSV report plus simple visualizations (bar and pie charts). Designed as a quick demo you can show at career fairs or include in your GitHub portfolio.
+Beginner-friendly cybersecurity log triage tool built with Python and Flask. This tool simulates basic SOC log triage by identifying suspicious login activity from authentication logs.
 
-Features
-- Flask demo with file upload and report download
-- Robust parsing heuristics for common auth log entries
-- Generates `security_report.csv`, `login_attempts_bar.png`, and `login_attempts_pie.png`
-- Unit test for the parser to demonstrate good engineering practices
+It parses Linux authentication logs, identifies failed and successful login attempts, summarizes high-activity IP addresses, and generates CSV reports and visual charts.
 
-Quickstart
+## Features
+- Parses Linux authentication logs
+- Identifies failed and successful login attempts
+- Extracts timestamp, username, IP address, and raw message
+- Summarizes high-activity IP addresses
+- Generates CSV reports and visual charts
+- Web UI for uploads and a simple CLI mode
 
-1. Create and activate a virtual environment:
-
+## Run
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows (PowerShell): venv\\Scripts\\Activate.ps1
 pip install -r requirements.txt
-```
-
-2. Run the demo web app (local):
-
-```bash
 python app.py
-# then open http://localhost:5000 in your browser
 ```
-
-3. Or run the CLI against the included `sample_log.txt`:
 
 ```bash
-python -m log_analyzer.log_analyzer -f log_analyzer/sample_log.txt -o ./static
+python -m log_analyzer.log_analyzer -f sample_log.txt -o static
 ```
-
-What's improved for presentation
-- Clear README and instructions
-- Polished web UI and safe file handling
-- CSV + visuals saved to `static/` so images and reports are easy to display on GitHub Pages or the demo site
-
-License
-
-MIT
-
-Badges
-
-![CI](https://github.com/darasimiop/log-analyzer/actions/workflows/ci.yml/badge.svg)
-
-Docker
-
-Build the image and run the demo locally:
 
 ```bash
-docker build -t log-analyzer .
-docker run --rm -p 5000:5000 log-analyzer
-# open http://localhost:5000 in your browser
+python -m pytest
 ```
-
-

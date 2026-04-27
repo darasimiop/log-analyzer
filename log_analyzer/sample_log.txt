@@ -1,16 +1,15 @@
-Feb 26 18:54:32 Jidion login[704]: pam_unix(login:session): session opened for user darasimiop(uid=1000) by (uid=0)
-Feb 26 18:54:32 Jidion systemd-logind[209]: New session 1 of user darasimiop.
-Feb 26 18:54:32 Jidion systemd: pam_unix(systemd-user:session): session opened for user darasimiop(uid=1000) by (uid=0)
-Feb 26 19:09:01 Jidion CRON[5991]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
-Feb 26 19:09:01 Jidion CRON[5991]: pam_unix(cron:session): session closed for user root
-Feb 26 19:11:52 Jidion sudo: darasimiop : TTY=pts/5 ; PWD=/mnt/c/Users/daras/OneDrive/Documents/CyberSecurity Projects/log-analyzer ; USER=root ; COMMAND=/usr/bin/apt update
-Feb 26 19:11:52 Jidion sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
-Feb 26 19:11:56 Jidion sudo: pam_unix(sudo:session): session closed for user root
-Feb 26 19:11:56 Jidion sudo: darasimiop : TTY=pts/5 ; PWD=/mnt/c/Users/daras/OneDrive/Documents/CyberSecurity Projects/log-analyzer ; USER=root ; COMMAND=/usr/bin/apt install python3-venv -y
-Feb 26 19:11:56 Jidion sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
-Feb 26 19:12:03 Jidion sudo: pam_unix(sudo:session): session closed for user root
-Feb 26 19:17:02 Jidion CRON[10478]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
-Feb 26 19:17:02 Jidion CRON[10478]: pam_unix(cron:session): session closed for user root
-Feb 26 19:18:19 Jidion sudo: darasimiop : TTY=pts/5 ; PWD=/mnt/c/Users/daras/OneDrive/Documents/CyberSecurity Projects/log-analyzer ; USER=root ; COMMAND=/usr/bin/apt install python3-pip
-Feb 26 19:18:19 Jidion sudo: pam_unix(sudo:session): session opened for user root(uid=0) by (uid=1000)
-Feb 26 19:18:27 Jidion sudo: pam_unix(sudo:session): session closed for user root
+Apr 27 08:12:10 labhost sshd[1132]: Failed password for invalid user admin from 192.168.1.10 port 22 ssh2
+Apr 27 08:12:14 labhost sshd[1132]: Failed password for root from 10.0.0.5 port 22 ssh2
+Apr 27 08:12:18 labhost sshd[1132]: Failed password for invalid user guest from 203.0.113.24 port 22 ssh2
+Apr 27 08:13:01 labhost sshd[1189]: Accepted password for dara from 172.16.0.2 port 22 ssh2
+Apr 27 08:13:04 labhost sshd[1189]: Accepted password for analyst from 172.16.0.2 port 22 ssh2
+Apr 27 08:13:09 labhost sshd[1189]: Accepted password for devops from 198.51.100.8 port 2222 ssh2
+Apr 27 08:14:55 labhost sudo: dara : TTY=pts/0 ; PWD=/home/dara ; USER=root ; COMMAND=/usr/bin/apt update
+Apr 27 08:15:12 labhost CRON[2014]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+Apr 27 08:15:12 labhost CRON[2014]: pam_unix(cron:session): session closed for user root
+Apr 27 08:16:42 labhost sshd[1301]: Failed password for invalid user test from 192.0.2.44 port 22 ssh2
+Apr 27 08:17:08 labhost sshd[1301]: Failed password for root from 192.0.2.44 port 22 ssh2
+Apr 27 08:17:55 labhost sshd[1320]: Accepted password for intern from 203.0.113.24 port 22 ssh2
+Apr 27 08:18:31 labhost systemd-logind[612]: New session 4 of user dara.
+Apr 27 08:19:02 labhost sshd[1402]: Failed password for invalid user oracle from 198.51.100.8 port 22 ssh2
+Apr 27 08:19:44 labhost sshd[1402]: Failed password for root from 198.51.100.8 port 22 ssh2
